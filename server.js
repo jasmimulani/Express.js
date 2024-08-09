@@ -2,7 +2,7 @@ const express = require("express");
 //   create server in express
 const server = express();
 
-//  const morgan = require('morgan');
+ const morgan = require('morgan');
 
 //  server.use(morgan('dev'));
 //  server.use(morgan('tiny'));
@@ -30,8 +30,8 @@ const server = express();
 // -----------------------------------------------------------------------------
 //  inbulit-middelware
 
-server.use(express.json());
-server.use(express.urlencoded({ extended: false }));
+server.use(express.json());    // postman ma  body -> raw -> json data 
+server.use(express.urlencoded({ extended: false }));  //  ody -> x-ww-form-encoded -> key-value
 // server.use("/hello",express.static('public'))
 
 // public dir -> index.html file to be run
