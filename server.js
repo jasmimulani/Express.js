@@ -2,7 +2,7 @@ const express = require("express");
 //   create server in express
 const server = express();
 
- const morgan = require('morgan');
+//  const morgan = require('morgan');
 
 //  server.use(morgan('dev'));
 //  server.use(morgan('tiny'));
@@ -37,7 +37,7 @@ server.use(express.urlencoded({ extended: false }));  //  ody -> x-ww-form-encod
 // public dir -> index.html file to be run
 //  middelware function
 const myfun = (req, res, next) => {
-  console.log(req.body);
+  // console.log(req.body);
   next();
   // if(req.query.age >=18){
   //   console.log(('sucesss......'));
@@ -62,6 +62,6 @@ server.post("/login", myfun, (req, res) => {
 //   res.send("<h1> this is post method </h1>");
 // });
 
-server.listen(8000, () => {
-  console.log("server start at  http://localhost:8000");
-});
+// server.listen(8000, () => {
+//   console.log("server start at  http://localhost:8000");
+// });
