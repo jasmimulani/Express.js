@@ -1,67 +1,63 @@
 const express = require("express");
 const morgan = require("morgan");
 const app = express();
-const users = require("./user.json")
-
-// console.log(User);
-
+const products = require("./product.json");
+// console.log(product);
 
 app.use(morgan("dev"));
 app.use(express.json());
-app.use(express.urlencoded({extended: false}));
+app.use(express.urlencoded({extended :false}));
 
- app.get("/",(req,res) =>{
-    res.send("welcome to expres server");
- });
-
-//   crud operation in api
-//  creat user
-
-app.post("/user",(req,res) =>{
-    // console.log(req.body)
-    users.push(req.body);   
-    res.json({msg:"user added"});
-}); 
-
-//  read - get all user                    //-> first of all get run and than post method run to localhost/user => reply aaded msg after that open new tab in post man and get localhost/user => display aaed person and than single argemnet  localhost/user/11
-app.get("/user",(req,res) =>{
-    res.json(users);
+app.get("/" ,(req,res) =>{
+    res.send("welcome note prectise project");
 });
 
-    //  get sigle user
-    app.get("/user/:id",(req,res) =>{
-        let id= +req.params.id;
-        let item = users.find((User) =>User.id === id)
-        res.json(item);
-});
-
-//  replace data - put
-
-app.put("/user/:id",(req,res) =>{
-    let id = +req.params.id;
-    let userindex = users.findIndex((item) => item.id === id);
-    users.splice(userindex , 1 , req.body);
-    res.json({msg:'user replaced succesfully'});
+//  create 
+app.post("/product",(req,res) =>{
+    // console.log(req.body);
+    products.push(req.body)
+    res.json({msg:'product added'})
+    // res.json(product) // direct add to display our json data not require to get method
+    
+})
+app.get('/product',(req,res) =>{
+    res.json(products)
 })
 
-//  update  data -patch
+//   find single id as params
+app.get('/product/:id' ,(req,res) =>{
+    let id = +req.params.id
+    let item = products.find((product) => product.id ===id)
+    res.json(item)
+})
 
- app.patch("/user/:id",(req,res) =>{
+//  replace 
+
+app.put("/product/:id" ,(req,res) =>{
+    let id=+req.params.id;
+    let productindex = products.findIndex((item) => item.id === id);
+    products.splice(productindex ,1,req.body);
+    res.json({msg:"replace sucesss"});
+})
+
+
+app.patch("/product/:id",(req,res)=>{
+    let id =+req.params.id;
+    let productindex =products.findIndex((item) => item.id === id);
+    let product = products[productindex];
+    products.splice(productindex,1,{...product ,...req.body});
+    res.json({msg:"update properlyy...."})
+})
+
+ app.delete("/product/:id",(req,res) =>{
     let id = +req.params.id;
-    let userindex = users.findIndex((item) => item.id === id);
-     let user = users[userindex];
-     users.splice(userindex , 1, {...user, ...req.body});
-     res.json({msg:" user update succesfully"})
+   let  productindex = products.findIndex((item) => item.id === id);
+    products.splice(productindex ,1);
+    res.json({msg:"user detele"})
  })
 
 
- app.delete("/user/:id",(req,res) =>{
-    let id = +req.params.id;
-    let userindex = users.findIndex((item) => item.id ===id);
-    users.splice(userindex,1);
-    res.json({msg :"user delete sucsessss"});
- });
-
-app.listen(3030,() =>{
-    console.log(`server start at http://localhost:3030`);
+app.listen(2525,() =>{
+    console.log('server start at http://localhost:2525');
+    
 })
