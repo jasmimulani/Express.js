@@ -58,6 +58,5 @@ app.patch("/product/:id",(req,res)=>{
 
 
 app.listen(2525,() =>{
-    console.log('server start at http://localhost:2525');
-    
+    console.log('server start at http://localhost:2525'); 
 })
