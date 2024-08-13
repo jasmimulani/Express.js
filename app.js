@@ -1,7 +1,6 @@
 const express = require("express");
 const morgan = require("morgan");
 const app = express();
-
  const userRotes = require('./routers/user.routes')
 
 app.use(morgan("dev"));
