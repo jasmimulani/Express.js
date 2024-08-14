@@ -12,7 +12,7 @@ app.use(express.urlencoded({extended: false}));
     res.send("welcome to expres server");
  });
 
- app.use('/',userRotes)
+ app.use("/api/user", userRotes)
 
 
 app.listen(3030,() =>{

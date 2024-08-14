@@ -3,19 +3,19 @@ const express = require("express");
 const userRotes = express.Router();
 
  const {addNewUser
-    // , getAllUser,getUser,replaceUser,updateUser,deleteUser
+    // , getAllUser,getUser,replaceUser,u pdateUser,deleteUser
 } = require("../controller/user.controller")
 
-userRotes.post("/api/user",addNewUser); 
+userRotes.post("/",addNewUser); 
 
-// userRotes.get("/user",getAllUser);
+// userRotes.get("/",getAllUser);
 
-// userRotes.get("/user/:id",getUser);
+// userRotes.get("/:id",getUser);
 
-// userRotes.put("/user/:id",replaceUser)
+// userRotes.put("/:id",replaceUser)
 
-// userRotes.patch("/user/:id",updateUser)
+// userRotes.patch("/:id",updateUser)
 
-//  userRotes.delete("/user/:id",deleteUser);
+//  userRotes.delete("/:id",deleteUser);
 
 module.exports = userRotes;

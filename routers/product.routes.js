@@ -3,16 +3,16 @@ const productRoutes = express.Router();
 const {addNewUser
     ,getAllUser,getUser,replaceUser,updateUser,deleteUser
     } = require('../controller/product.controller')
-productRoutes.post("/product",addNewUser)
+productRoutes.post("/",addNewUser)
 
-productRoutes.get('/product' ,getAllUser)
+productRoutes.get('/' ,getAllUser)
 
-productRoutes.get('/product/:id' ,getUser)
+productRoutes.get('/:id' ,getUser)
 
-productRoutes.put("/product/:id" ,replaceUser)
+productRoutes.put("/:id" ,replaceUser)
 
-productRoutes.patch("/product/:id",updateUser)
+productRoutes.patch("/:id",updateUser)
 
-productRoutes.delete("/product/:id",deleteUser)
+productRoutes.delete("/:id",deleteUser)
 
  module.exports = productRoutes;
