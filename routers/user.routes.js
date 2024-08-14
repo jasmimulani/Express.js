@@ -6,7 +6,7 @@ const userRotes = express.Router();
     // , getAllUser,getUser,replaceUser,updateUser,deleteUser
 } = require("../controller/user.controller")
 
-userRotes.post("/user",addNewUser); 
+userRotes.post("/api/user",addNewUser); 
 
 // userRotes.get("/user",getAllUser);
 
