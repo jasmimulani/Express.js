@@ -2,20 +2,22 @@ const express = require("express");
 
 const userRotes = express.Router();
 
- const {addNewUser
-    // , getAllUser,getUser,replaceUser,u pdateUser,deleteUser
+ const {addNewUser, 
+    getAllUser,
+    getUser
+    ,updateUser
+    ,deleteUser
 } = require("../controller/user.controller")
 
 userRotes.post("/",addNewUser); 
 
-// userRotes.get("/",getAllUser);
+userRotes.get("/",getAllUser);
 
-// userRotes.get("/:id",getUser);
+userRotes.get("/get-user",getUser);
 
-// userRotes.put("/:id",replaceUser)
 
-// userRotes.patch("/:id",updateUser)
+userRotes.put("/",updateUser)
 
-//  userRotes.delete("/:id",deleteUser);
+ userRotes.delete("/",deleteUser);
 
 module.exports = userRotes;

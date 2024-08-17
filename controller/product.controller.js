@@ -1,41 +1,87 @@
 
-const products = require("../product.json");
+// const products = require("../product.json");
+const Pro = require ("../model/product_model");
 
 
-exports.addNewUser =(req,res) =>{
-    // console.log(req.body);
-    products.push(req.body)
-    res.json({msg:'product added'});
+exports.addNewProduct = async(req,res) =>{
+   try{
+    let product = await Pro.findOne({email: req.body.email});
+    if(product){
+        return res.status(400).json({mes:"user alredy exist........"});
+    }
+    product = await Pro.create(req.body);
+ res.status(201).json({product, msg:"user added......."})
+}catch(err) {
+    console.log(err);
+    res.status(500).json({ msg:'internal server error'})  
+}
+   };
+
+
     
-}
-exports.getAllUser =(req,res) =>{
-    res.json(products)
-}
+   exports.getAllProduct = async (req,res) =>{
+    try{
+        let product =  await Pro.find();
+        res.status(200).json(product);
+    }catch(err){
+        console.log(err);
+        res.status(500).json({msg:"internal servar error"})
+        
+    }
+};
 
-exports.getUser =(req,res) =>{
-    let id = +req.params.id
-    let item = products.find((product) => product.id ===id)
-    res.json(item)
-}
+exports.getProduct= async(req,res) =>{
+    try{
+        // let user = await Pro.findOne({firstName: req.query.firstName});
+        let product = await Pro.findOne({firstName:"vansh"});
+          // let product = await Pro.findOne({_id: req.query.productId});
+        // let product = await Pro.findOne({_id:'66bca7498f5246ed3c6b5893'});
 
-exports.replaceUser =(req,res) =>{
-    let id=+req.params.id;
-    let productindex = products.findIndex((item) => item.id === id);
-    products.splice(productindex ,1,req.body);
-    res.json({msg:"replace sucesss"});
-}
+        // let product = await  Pro.findById(req.query.productId);
+        // let product = await  Pro.findById("66bca77d8f5246ed3c6b5899");
+        // console.log(product);
 
-exports.updateUser=(req,res)=>{
-    let id =+req.params.id;
-    let productindex =products.findIndex((item) => item.id === id);
-    let product = products[productindex];
-    products.splice(productindex,1,{...product ,...req.body});
-    res.json({msg:"update properlyy...."})
-}
+        if(!product){
+            return res.status(404).json({msg:'product not found'});
+        }
+        res.status(200).json(product);
+    }catch(err){
+        console.log(err);
+        res.status(500).json({msg:"internal server error"});
+    }
+};
 
-exports.deleteUser=(req,res) =>{
-    let id = +req.params.id;
-   let  productindex = products.findIndex((item) => item.id === id);
-    products.splice(productindex ,1);
-    res.json({msg:"user detele"})
- }
+exports.updateProduct= async(req,res)=>{
+    try{
+           let product = await Pro.findById(req.query.productId);
+        //    console.log(product);
+        if(!product){
+            return res.status(404).json({msg:"product not found"});
+        }
+        product = await Pro.findByIdAndUpdate(product._id,{$set: req.body},{new:true});
+        res.status(202).json({product,msg:" product update sucess"});
+    }catch(err){
+        console.log(err);
+        res.status(500).json({msg:"internal server error"})
+        
+    }
+}
+   
+
+exports.deleteProduct= async(req,res) =>{
+    try{
+        let product = await Pro. findById(req.query.productId);
+        // console.log(product);
+        if(!product){
+            return res.status(404).json({msg:"product not found"});
+        }
+        product = await Pro.deleteOne({_id: product._id})
+        // product = awiat Pro.findOneAndDelete(product._id)
+        // product = awiat Pro.findByIdAndDelete(product._id)
+        res.status(200).json({product, msg:"product delete sucsess"});
+    }catch(err){
+        console.log(err);
+        res.status(500).json({msg:"internal sarver error"})
+
+    }
+ };

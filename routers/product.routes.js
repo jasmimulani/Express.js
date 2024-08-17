@@ -1,18 +1,23 @@
 const express = require("express");
+
 const productRoutes = express.Router();
-const {addNewUser
-    ,getAllUser,getUser,replaceUser,updateUser,deleteUser
+
+const {addNewProduct ,
+    getAllProduct,
+    getProduct,
+    updateProduct,
+    deleteProduct
     } = require('../controller/product.controller')
-productRoutes.post("/",addNewUser)
 
-productRoutes.get('/' ,getAllUser)
 
-productRoutes.get('/:id' ,getUser)
+productRoutes.post("/",addNewProduct)
 
-productRoutes.put("/:id" ,replaceUser)
+productRoutes.get('/' ,getAllProduct)
 
-productRoutes.patch("/:id",updateUser)
+productRoutes.get('/get-product' ,getProduct)
 
-productRoutes.delete("/:id",deleteUser)
+productRoutes.put("/",updateProduct)
+
+productRoutes.delete("/",deleteProduct)
 
  module.exports = productRoutes;

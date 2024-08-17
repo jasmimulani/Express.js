@@ -49,6 +49,7 @@ app.listen(3030,() =>{
 // const express = require("express");
 // const morgan = require("morgan");
 // const app = express();
+// const mongoose = require('mongoose')
 // const productRoutes = require("./routers/product.routes")
 // // console.log(product);
 
@@ -61,11 +62,16 @@ app.listen(3030,() =>{
 //     res.send("Welcome to server")
 // })
 
-// app.use("/" , productRoutes);
+// app.use("/api/product" , productRoutes);
 
 // app.listen(2525,() =>{
+
+//     mongoose
+//     .connect('mongodb://127.0.0.1:27017/productapi')
+//     .then(() => console.log('database connection sucessfull'))
+//     .catch((err) => console.log(err));
 //     console.log('server start at http://localhost:2525'); 
-// })
+// });
 
 
 
