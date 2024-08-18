@@ -4,9 +4,9 @@ const userRotes = express.Router();
 
  const {addNewUser, 
     getAllUser,
-    getUser
-    ,updateUser
-    ,deleteUser
+    getUser,
+    updateUser,
+    deleteUser
 } = require("../controller/user.controller")
 
 userRotes.post("/",addNewUser); 

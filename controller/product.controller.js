@@ -5,9 +5,11 @@ const Pro = require ("../model/product_model");
 
 exports.addNewProduct = async(req,res) =>{
    try{
-    let product = await Pro.findOne({email: req.body.email});
+    let product = await Pro.findOne({firstName: req.body.firstName ,isDelete:false}); 
+    // console.log(product);
+
     if(product){
-        return res.status(400).json({mes:"user alredy exist........"});
+        return res.status(400).json({msg:"user alredy exist..."});
     }
     product = await Pro.create(req.body);
  res.status(201).json({product, msg:"user added......."})
@@ -21,7 +23,7 @@ exports.addNewProduct = async(req,res) =>{
     
    exports.getAllProduct = async (req,res) =>{
     try{
-        let product =  await Pro.find();
+        let product =  await Pro.find({isDelete: false});
         res.status(200).json(product);
     }catch(err){
         console.log(err);
@@ -70,12 +72,12 @@ exports.updateProduct= async(req,res)=>{
 
 exports.deleteProduct= async(req,res) =>{
     try{
-        let product = await Pro. findById(req.query.productId);
+        let product = await Pro.findOne({_id:req.query.productId , isDelete:false});
         // console.log(product);
         if(!product){
             return res.status(404).json({msg:"product not found"});
         }
-        product = await Pro.deleteOne({_id: product._id})
+        product = await Pro.findByIdAndUpdate(product._id,{isDelete:true},{new:true});
         // product = awiat Pro.findOneAndDelete(product._id)
         // product = awiat Pro.findByIdAndDelete(product._id)
         res.status(200).json({product, msg:"product delete sucsess"});

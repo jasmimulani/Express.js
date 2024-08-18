@@ -1,9 +1,9 @@
-const User = require("../model/user.model")
+  const User = require("../model/user.model")
 
 
 exports.addNewUser = async(req,res) =>{
     try{
-     let user = await User.findOne({email : req.body.email});
+     let user = await User.findOne({email : req.body.email, isDelete:false});
         // console.log(user);
         if(user){
             return res.status(400).json({mes:"user alredy exist........"});
@@ -18,7 +18,7 @@ exports.addNewUser = async(req,res) =>{
 
 exports.getAllUser = async (req,res) =>{
     try{
-        let users =  await User.find();
+        let users =  await User.find({isDelete:false});
         res.status(200).json(users);
     }catch(err){
         console.log(err);
@@ -70,12 +70,12 @@ exports.updateUser= async(req,res) =>{
 
  exports.deleteUser= async(req,res) =>{
   try{
-    let user = await User.findById(req.query.userId);
-    console.log(user);
+    let user = await User.findOne({_id:req.query.userId ,isDelete:false});
+    // console.log(user);
     if(!user){
         return res.status(404).json({msg:"user not found"});
     }
-    user = await User.deleteOne({_id:user._Id})
+    user = await User.findByIdAndUpdate(user._Id , {isDelete:true},{new:true});
     // user = awiat Pro.findOneAndDelete(user._id)
         // user = awiat Pro.findByIdAndDelete(user._id)
         res.status(200).json({user, msg:"product delete.."})
