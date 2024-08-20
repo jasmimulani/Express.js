@@ -5,7 +5,7 @@ const Pro = require ("../model/product_model");
 
 exports.addNewProduct = async(req,res) =>{
    try{
-    let product = await Pro.findOne({firstName: req.body.firstName ,isDelete:false}); 
+    let product = await Pro.findOne({title: req.body.title ,isDelete:false}); 
     // console.log(product);
 
     if(product){
@@ -35,7 +35,7 @@ exports.addNewProduct = async(req,res) =>{
 exports.getProduct= async(req,res) =>{
     try{
         // let user = await Pro.findOne({firstName: req.query.firstName});
-        let product = await Pro.findOne({firstName:"vansh"});
+        let product = await Pro.findOne({titel:"A-mart"});
           // let product = await Pro.findOne({_id: req.query.productId});
         // let product = await Pro.findOne({_id:'66bca7498f5246ed3c6b5893'});
 

@@ -1,22 +1,23 @@
 const mongoose = require ('mongoose');
 
  const productSchema = mongoose.Schema({
-    firstName: String ,       // short heand method
-    lastName:{
-         type: String,
-    },
-    email:{
-        type: String,
-    },
-    age:{
+   
+    title :{
+        type:String,
+    } ,
+    price:{
         type:Number,
     },
-    hobbies:[{type:String}],
-    address:{
-        line1:String,
-        line2:String,
-        pincode:Number
+    descripation: {
+        type:String,
+    } ,
+    discountPercentage:{
+        type:Number
     },
+    category:{
+        type:String,
+    },
+
     isDelete:{
         type:Boolean,
         default:false
