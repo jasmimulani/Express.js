@@ -15,7 +15,7 @@
             
             imagepath = req.file.path.replace(/\\/g,"/")
         }
-        let hashPassword = await bcrypt.hash(req.body.password,10);
+        let hashPassword = await bcrypt.hash(req.body.password , 10);
         // console.log(hashPassword);
         user =  await User.create({...req.body, password:hashPassword,profileImage:imagepath});
 
@@ -37,12 +37,11 @@
             if(!comparedpassword){
                 return res.json({msg:"incorrect pass or email..."})
             }
-
             let token = await jwt.sign({userId:user._id},process.env.JWT_SECRET);
             console.log(token);  //token console log 
             
             
-            res.status(200).json({msg:"login success..", user});
+            res.status(200).json({msg:"login success..", token});
         }catch (err){
             console.log(err);
             res.status(500).json({msg:"internal server error"});
@@ -84,29 +83,37 @@
             }
           }
 
-        //   exports.changePassword = async(req,res) =>{
-        //     try {
-        //       let user = await User.findOne({email:req.body.email,isDelete:false});
-        //       if(!user){
-        //         return res.json({msg:"user not found"});
-        //       }
-        //       let oldpass = await bcrypt.compare(req.body.password,user.password);
-        //       if(!oldpass){
-        //         return res.json({msg:"oldpss don't match"})
-        //       }
-        //       res.status(202).json({msg:"pass is match"})
+          exports.changePassword = async(req,res) =>{
+            try {
+            let  user = await User.findById(req.user._id);
+              if(!user){
+                return res.status(400).json({msg:"user not found"});
+              }
 
-        //       let newpass = await bcrypt.compare(oldpass.password , newpass.pass);
-        //       if(!newpass){
-        //         return res.json({msg:"sucess..enter confirm pass"})
-        //       }
-        //       res.status(202).json({msg:"old and new pass match"})
+              let {oldpassword,newpassword,confirmpassword} = req.body;
+
+              let match = await bcrypt.compare(oldpassword,user.password)
+              if(!match){
+                return res.status(400).json({msg:"invalid old password"})
+              }
+  
+              if(oldpassword === newpassword){
+                return res.status(400).json({msg:"old and new password both are same"});
+              }
             
-        // } catch (err) {
-        //     console.log(err);
-        //     res.status(500).json({msg:"internal server error"})
-        // }   
-        // };
+              if(newpassword !== confirmpassword){
+                return res.status(400).json({msg:" new and confirm password dont match"})
+              }
+              
+              const hashenewpassword = await bcrypt.hash(newpassword,10);
+                await User.findByIdAndUpdate(req.user._id,{password:hashenewpassword});
+                res.status(200).json({msg:"password change succsessfullay!"})
+        } catch (err) {
+            console.log(err);
+            res.status(500).json({msg:"internal server error"})
+        }   
+        };
   
 
                 
+     
