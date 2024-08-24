@@ -7,10 +7,15 @@ const productRoutes = require("./routers/product.routes")
  const userRotes = require('./routers/user.routes')
 const port = process.env.PORT;
 // console.log(product);
+const  cors = require('cors');
+const path = require('path');
 
+app.use(cors());
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({extended :false}));
+
+app.use("/public/images",express.static(path.join(__dirname,"public/images")))
 
 
 app.get('/',(req,res) =>{
@@ -28,7 +33,4 @@ app.listen(port,() =>{
     .catch((err) => console.log(err));
     console.log(`server start at http://localhost:${port}`); 
 });
-
-
-
 

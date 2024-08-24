@@ -2,12 +2,17 @@ const express = require("express");
 
 const userRotes = express.Router();
 
- const { registerUser,  loginUser, getprofile, updateprofile } = require("../controller/user.controller");
+ const { registerUser,  loginUser, getprofile, updateprofile, DeleteUser,
+    //  changePassword
+     } = require("../controller/user.controller");
 const { verifyToken } = require("../helpers/verifyToken");
+const { upload } = require("../helpers/imageUpload");
 
-userRotes.post('/signup' , registerUser);
+userRotes.post('/signup' , upload.single('profileImage'),registerUser);
 userRotes.post('/signin' , loginUser);
 userRotes.get('/me' , verifyToken,getprofile);
 userRotes.put('/update' , verifyToken, updateprofile);
+userRotes.delete('/delete' , verifyToken,DeleteUser);
+// userRotes.get('/pass' ,changePassword);
 
 module.exports = userRotes;

@@ -15,7 +15,7 @@ const mongoose = require('mongoose')
     mobileNo:{
         type:String
     },
-    profilrImage:{
+    profileImage:{
         type:String
     },
     age:{
