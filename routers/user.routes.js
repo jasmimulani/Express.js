@@ -3,7 +3,8 @@ const express = require("express");
 const userRotes = express.Router();
 
  const { registerUser,  loginUser, getprofile, updateprofile, DeleteUser,
-     changePassword
+     changePassword,
+     specialejs
      } = require("../controller/user.controller");
 const { verifyToken } = require("../helpers/verifyToken");
 const { upload } = require("../helpers/imageUpload");
@@ -14,5 +15,6 @@ userRotes.get('/me' , verifyToken,getprofile);
 userRotes.put('/update' , verifyToken, updateprofile);
 userRotes.delete('/delete' , verifyToken,DeleteUser);
 userRotes.put('/pass' ,verifyToken,changePassword);
+userRotes.get('/' ,specialejs);
     
 module.exports = userRotes;

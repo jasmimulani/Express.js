@@ -1,6 +1,7 @@
   const User = require("../model/user.model")
    const bcrypt = require("bcrypt");
    const jwt = require('jsonwebtoken');
+const { trace } = require("../routers/product.routes");
 
 
    exports.registerUser = async (req,res)=>{
@@ -114,6 +115,30 @@
         }   
         };
   
+          exports.specialejs = async (req,res)=>{
+            try {
+                      
+                // let user ={
+                //   firstName:"jasmi",
+                //   lastName:"mulani",
+                //   age:19,
+                //   email:"jasmi@gmail.com",
+                //   mobileNo:"1234567890"
+                // }
+                // res.render('user.ejs',{user});
+
+                let user = await User.findOne({firstName: req.query.name , isDelete:false});
+                if(!user){
+                  return res.render('notfound.ejs');
+                }
+                  res.render('student.hbs',{user})
+              
+            } catch (err) {
+                console.log(err);
+                res.status(500).json({msg:"internal server error"})
+                
+            }
+          }
 
                 
      
