@@ -11,7 +11,8 @@ const port = process.env.PORT;
 const  cors = require('cors');
 const path = require('path');
 const ejs = require('ejs')
-const hbs = require('hbs')
+const hbs = require('hbs');
+const orderRoutes = require('./routers/order.routes');
 
 app.use(cors());
 app.use(morgan("dev"));
@@ -31,6 +32,7 @@ app.get('/',(req,res) =>{
  app.use("/api/user", userRotes)
 app.use("/api/product" , productRoutes);
 app.use("/api/cart" , cartRoutes);
+app.use("/api/order" , orderRoutes);
 
 app.listen(port,() =>{
 

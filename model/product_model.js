@@ -27,4 +27,4 @@ const mongoose = require ('mongoose');
     timestamps:true
  });
 
- module.exports = mongoose.model('product', productSchema);
+ module.exports = mongoose.model('products', productSchema);

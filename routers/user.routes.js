@@ -18,3 +18,10 @@ userRotes.put('/pass' ,verifyToken,changePassword);
 userRotes.get('/' ,specialejs);
     
 module.exports = userRotes;
+
+// jasmi
+
+// eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmQ2ZTgxNmMwY2EzN2IwM2QzZTI5NTciLCJpYXQiOjE3MjUzNjIyNDV9.Ji0mCI7gdUz4o_GRg-G4u9ZK5z3RpQngZCD5sDBM7s4 
+
+// khanak
+// eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmQ2ZTgyN2MwY2EzN2IwM2QzZTI5NWEiLCJpYXQiOjE3MjUzNjIyNzV9.BXVmLCQ1zZtxyQv08bkan4I9y_imhWkpFDYzyerwc98
