@@ -7,6 +7,7 @@ const productRoutes = require("./routers/product.routes")
  const userRotes = require('./routers/user.routes')
  const cartRoutes= require('./routers/cart.routes')
 const port = process.env.PORT;
+const nodemailler = require('nodemailer')
 // console.log(product);
 const  cors = require('cors');
 const path = require('path');
@@ -33,6 +34,31 @@ app.get('/',(req,res) =>{
 app.use("/api/product" , productRoutes);
 app.use("/api/cart" , cartRoutes);
 app.use("/api/order" , orderRoutes);
+
+//  node mailer
+const transporter = nodemailler.createTransport(
+    {
+        secure:true,
+        host:'smtp.gmail.com',
+        port:465,
+        auth:{
+            user:'jasmimulani@gmail.com',
+            pass:'aqks uryt cnar wjgm'
+
+        }
+    }
+);
+function sendmail(to,sub,msg){
+    transporter.sendMail(
+        {
+            to:to,
+            sub:sub,
+            html:msg
+        });
+        console.log('email sent');
+        
+}
+  sendmail('jasmimulani@gmail.com',"interview"," Dear [Candidate's Name],I hope this message finds you well. We were impressed with your application for the [backend devloper]role at [Google], and we would like to invite you for an interview. ")
 
 app.listen(port,() =>{
 
